@@ -17,7 +17,7 @@ void FXAS21002CBasic::changePowerMode(byte mode)
     writeBitsToReg(CTRL_REG1,POWER_MODE_BITS,mode);
 }
 
-
+//Wait till power mode transits
 void FXAS21002CBasic::waitTill(byte mode)
 { 
     while (readPowerMode() != mode)
@@ -116,25 +116,14 @@ void FXAS21002CBasic::changeRange(int fsr)
 
 }
 
-void FXAS21002CBasic::calibrateGyro()
-{
-    float average[2];
-    Serial.println("calibrating gyro, place the gyro on a stable surface, idol state till calibration ends.");
-    for (int i = 0; i < 100; i++)
-    {
-        /* code */
-    }
-    
 
-}
-
-gyro_data FXAS21002CBasic::getGyroData()
+void FXAS21002CBasic::getGyroData(float* gyro_data)
 { 
-    gyro_data angular_vel;
-    angular_vel.x = (readWordFromReg(OUT_X_MSB_REG)*sensitivity) - x_offset;
-    angular_vel.y = (readWordFromReg(OUT_Y_MSB_REG)*sensitivity) - y_offset;
-    angular_vel.z = (readWordFromReg(OUT_Z_MSB_REG)*sensitivity) - z_offset;
+    float* gyro_data;
+    gyro_data[0]  = (readWordFromReg(OUT_X_MSB_REG)*sensitivity);
+    gyro_data[1]  = (readWordFromReg(OUT_Y_MSB_REG)*sensitivity); 
+    gyro_data[2]  = (readWordFromReg(OUT_Z_MSB_REG)*sensitivity);
     
-    return angular_vel;
+    return ;
 
 }
