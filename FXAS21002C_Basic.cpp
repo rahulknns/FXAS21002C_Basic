@@ -7,8 +7,8 @@ FXAS21002CBasic::FXAS21002CBasic(byte address, int port_no)
 {
     setupDevice(address,port_no);
     checkConnection();
-    changeRange(2000);
-    changeODR(400);
+    changeRange(DEFAULT_FSR);
+    changeODR(DEFAULT_ODR);
 }
 
 //Changes device between active and Standby Mode

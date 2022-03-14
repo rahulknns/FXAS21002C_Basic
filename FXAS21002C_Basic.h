@@ -7,7 +7,6 @@ class FXAS21002CBasic: protected I2CDevice
 {
 protected:
    float sensitivity;
-   float x_offset,y_offset,z_offset;
    
 
 public:
