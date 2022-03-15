@@ -5,7 +5,12 @@
 
 FXAS21002CBasic::FXAS21002CBasic(byte address, int port_no)
 {
-    setupDevice(address,port_no);
+    while (!((address >= 0x20) && (address <= 0x21)))
+    {
+        Serial.println("Invalid address for FXAS21002C");
+        delay(1000);
+    }
+    setupDevice(address,port_no,400000);
     checkConnection();
     changeRange(DEFAULT_FSR);
     changeODR(DEFAULT_ODR);
@@ -119,10 +124,9 @@ void FXAS21002CBasic::changeRange(int fsr)
 
 void FXAS21002CBasic::getGyroData(float* gyro_data)
 { 
-    float* gyro_data;
-    gyro_data[0]  = (readWordFromReg(OUT_X_MSB_REG)*sensitivity);
-    gyro_data[1]  = (readWordFromReg(OUT_Y_MSB_REG)*sensitivity); 
-    gyro_data[2]  = (readWordFromReg(OUT_Z_MSB_REG)*sensitivity);
+    gyro_data[0]  = (readShortIntFromReg(OUT_X_MSB_REG)*sensitivity);
+    gyro_data[1]  = (readShortIntFromReg(OUT_Y_MSB_REG)*sensitivity); 
+    gyro_data[2]  = (readShortIntFromReg(OUT_Z_MSB_REG)*sensitivity);
     
     return ;
 

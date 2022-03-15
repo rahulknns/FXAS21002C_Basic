@@ -11,14 +11,14 @@ protected:
 
 public:
    FXAS21002CBasic() =default;
-   FXAS21002CBasic(byte address,int port_no);
+   FXAS21002CBasic(byte address,int port_no = 0);
 
   
    void getGyroData(float* gyro_data);
    void changeODR(int odr);
    void changeRange(int fsr);
   
-protected:
+
    void changePowerMode(byte mode);
    byte readPowerMode();
    void waitTill(byte mode);
