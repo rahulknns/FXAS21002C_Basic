@@ -2,7 +2,7 @@
 #include "FXAS21002C_Registers.h"
 
 
-
+//Constructor
 FXAS21002CBasic::FXAS21002CBasic(byte address, int port_no)
 {
     while (!((address >= 0x20) && (address <= 0x21)))
@@ -80,6 +80,7 @@ void FXAS21002CBasic::changeODR(int odr)
 
 }
 
+//change range of gyro, doesn't offer fsr boost!
 void FXAS21002CBasic::changeRange(int fsr)
 {
      if (readPowerMode() != STANDBY)
@@ -121,8 +122,8 @@ void FXAS21002CBasic::changeRange(int fsr)
 
 }
 
-
-void FXAS21002CBasic::getGyroData(float* gyro_data)
+//update angular acceleration
+void FXAS21002CBasic::updateGyroData(float* gyro_data)
 { 
     gyro_data[0]  = (readShortIntFromReg(OUT_X_MSB_REG)*sensitivity);
     gyro_data[1]  = (readShortIntFromReg(OUT_Y_MSB_REG)*sensitivity); 
