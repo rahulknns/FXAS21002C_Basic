@@ -122,6 +122,16 @@ void FXAS21002CBasic::changeRange(int fsr)
 
 }
 
+//Load calibration constants from eeprom
+void FXAS21002CBasic::loadCalibrationData(byte eeprom_address){
+     byte temp[4*3];
+    for (int i = 0; i < 4*3; i++)
+    {
+        temp[i] = EEPROM.read(eep_address + i);
+    }
+    memcpy(gyro_offset_,temp,4*3);
+
+}
 //update angular acceleration
 void FXAS21002CBasic::updateGyroData(float* gyro_data)
 { 

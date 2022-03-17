@@ -3,10 +3,12 @@
 #define FXAS21002C_BASIC_H
 #include "I2C_device.h"
 
+
 class FXAS21002CBasic: protected I2CDevice
 {
 protected:
    float sensitivity;
+   float gyro_offset[3];
    
 
 public:
@@ -17,6 +19,7 @@ public:
    void updateGyroData(float* gyro_data);
    void changeODR(int odr);
    void changeRange(int fsr);
+   void loadCalibrationData(byte eeprom_address);
   
 
    void changePowerMode(byte mode);
