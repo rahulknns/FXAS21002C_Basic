@@ -8,7 +8,7 @@ class FXAS21002CBasic: protected I2CDevice
 {
 protected:
    float sensitivity;
-   float gyro_offset[3];
+   float gyro_offset_[3] = {2.79,-0.12,0.03};
    
 
 public:

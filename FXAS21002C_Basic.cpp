@@ -1,6 +1,6 @@
 #include "FXAS21002C_Basic.h"
 #include "FXAS21002C_Registers.h"
-
+#include "EEPROM.h"
 
 //Constructor
 FXAS21002CBasic::FXAS21002CBasic(byte address, int port_no)
@@ -10,7 +10,7 @@ FXAS21002CBasic::FXAS21002CBasic(byte address, int port_no)
         Serial.println("Invalid address for FXAS21002C");
         delay(1000);
     }
-    setupDevice(address,port_no,400000);
+    setupDevice(address,port_no);
     checkConnection();
     changeRange(DEFAULT_FSR);
     changeODR(DEFAULT_ODR);
@@ -127,7 +127,7 @@ void FXAS21002CBasic::loadCalibrationData(byte eeprom_address){
      byte temp[4*3];
     for (int i = 0; i < 4*3; i++)
     {
-        temp[i] = EEPROM.read(eep_address + i);
+        temp[i] = EEPROM.read(eeprom_address + i);
     }
     memcpy(gyro_offset_,temp,4*3);
 
@@ -135,9 +135,9 @@ void FXAS21002CBasic::loadCalibrationData(byte eeprom_address){
 //update angular acceleration
 void FXAS21002CBasic::updateGyroData(float* gyro_data)
 { 
-    gyro_data[0]  = (readShortIntFromReg(OUT_X_MSB_REG)*sensitivity);
-    gyro_data[1]  = (readShortIntFromReg(OUT_Y_MSB_REG)*sensitivity); 
-    gyro_data[2]  = (readShortIntFromReg(OUT_Z_MSB_REG)*sensitivity);
+    gyro_data[0]  = (readShortIntFromReg(OUT_X_MSB_REG)*sensitivity) - gyro_offset_[0];
+    gyro_data[1]  = (readShortIntFromReg(OUT_Y_MSB_REG)*sensitivity) - gyro_offset_[1]; 
+    gyro_data[2]  = (readShortIntFromReg(OUT_Z_MSB_REG)*sensitivity) - gyro_offset_[2];
     
     return ;
 
