@@ -3,14 +3,14 @@
 #include "EEPROM.h"
 
 //Constructor
-FXAS21002CBasic::FXAS21002CBasic(byte address, int port_no)
+FXAS21002CBasic::FXAS21002CBasic(byte address, TwoWire* preferred_wire)
 {
     while (!((address >= 0x20) && (address <= 0x21)))
     {
         Serial.println("Invalid address for FXAS21002C");
         delay(1000);
     }
-    setupDevice(address,port_no);
+    setupDevice(address,preferred_wire);
     checkConnection();
     changeRange(DEFAULT_FSR);
     changeODR(DEFAULT_ODR);

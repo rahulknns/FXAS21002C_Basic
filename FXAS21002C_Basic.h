@@ -13,7 +13,7 @@ protected:
 
 public:
    FXAS21002CBasic() =default;
-   FXAS21002CBasic(byte address,int port_no = 0);
+   FXAS21002CBasic(byte address,TwoWire preferred_wire = &Wire);
 
   
    void updateGyroData(float* gyro_data);
