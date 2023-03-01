@@ -15,7 +15,6 @@ class FXAS21002CBasic: protected I2CDevice
 {
 protected:
    float sensitivity_;
-   float gyro_data_[3];
    
 
 public:
