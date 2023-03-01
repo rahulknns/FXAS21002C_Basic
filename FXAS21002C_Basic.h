@@ -26,7 +26,6 @@ public:
    void updateGyroData(float* gyro_data);
    void changeODR(int odr);
    void changeRange(int fsr);
-   void loadCalibrationData(byte eeprom_address);
   
 
    void changePowerMode(byte mode);
