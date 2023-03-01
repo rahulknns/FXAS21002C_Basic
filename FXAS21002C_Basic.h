@@ -9,17 +9,18 @@
 #define ACTIVE              0b00000010
 #define DEFAULT_ODR         100
 #define DEFAULT_FSR         1000
+#define DEFAULT_ADDRESS     0X1E
 
 class FXAS21002CBasic: protected I2CDevice
 {
 protected:
-   float sensitivity;
-   float gyro_data[3];
+   float sensitivity_;
+   float gyro_data_[3];
    
 
 public:
    FXAS21002CBasic() =default;
-   FXAS21002CBasic(byte address,TwoWire preferred_wire = &Wire);
+   FXAS21002CBasic(byte address = DEFAULT_ADDRESS,TwoWire preferred_wire = &Wire);
 
   
    void updateGyroData(float* gyro_data);
