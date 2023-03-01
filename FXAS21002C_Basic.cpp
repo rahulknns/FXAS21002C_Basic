@@ -92,21 +92,21 @@ void FXAS21002CBasic::changeRange(int fsr)
     {
     case 2000:
         writeBitsToReg(CTRL_REG0,FSR_BITS,0b00000000);
-       sensitivity = 7.8125*8*0.001;
+       sensitivity_ = 7.8125*8*0.001;
         break;
     case 1000:
         writeBitsToReg(CTRL_REG0,FSR_BITS,0b00000001);
-        sensitivity = 7.8125*4*0.001;
+        sensitivity_ = 7.8125*4*0.001;
         break;
     case 500:
         
         writeBitsToReg(CTRL_REG0,FSR_BITS,0b00000010);
-        sensitivity = 7.8125*2*0.001;
+        sensitivity_ = 7.8125*2*0.001;
         break;
     case 250:
         
         writeBitsToReg(CTRL_REG0,FSR_BITS,0b00000011);
-        sensitivity = 7.8125*1*0.001;
+        sensitivity_ = 7.8125*1*0.001;
         break;
     
     default:
