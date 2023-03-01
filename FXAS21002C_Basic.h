@@ -3,12 +3,18 @@
 #define FXAS21002C_BASIC_H
 #include "I2C_device.h"
 
+//Values for different configuration
+
+#define STANDBY             0b00000000
+#define ACTIVE              0b00000010
+#define DEFAULT_ODR         100
+#define DEFAULT_FSR         1000
 
 class FXAS21002CBasic: protected I2CDevice
 {
 protected:
    float sensitivity;
-   float gyro_offset_[3] = {2.79,-0.12,0.03};
+   float gyro_data[3];
    
 
 public:
